@@ -156,8 +156,7 @@ resource "aws_instance" "todo_public_ec21" {
         user = "ubuntu"
         private_key = file("/Users/sunilsahu/Downloads/todo-key-pair.pem")
         host = self.public_ip
-   }
-   on_failure = continue
+    }
 
     inline = [ 
         "sudo apt update -y",
@@ -174,12 +173,6 @@ resource "aws_instance" "todo_public_ec21" {
         "sudo systemctl restart nginx"
      ]
   }
-  connection {
-        type = "ssh"
-        user = "ubuntu"
-        private_key = file("/Users/sunilsahu/Downloads/todo-key-pair.pem")
-        host = self.public_ip
-   }
   depends_on = [aws_security_group.todo_public_ec21_sec_gr]
 }
 
